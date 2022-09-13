@@ -23,15 +23,22 @@ class GameViewController: UIViewController {
         
         var scene: SCNScene
         do {
-            let sceneSource = try GLTFSceneSource(named: "art.scnassets/GlassVase/Wayfair-GlassVase-BCHH2364.glb")
+         //   let sceneSource = try GLTFSceneSource(named: "art.scnassets/Test/iX_Nan.glb")
+            let sceneSource = GLTFSceneSource(url: Bundle.main.url(forResource: "iX_Nan", withExtension: "glb")!)
             scene = try sceneSource.scene()
+            scene.rootNode.scale = SCNVector3(1, 1, 1)
         } catch {
             print("\(error.localizedDescription)")
             return
         }
+        let light = SCNLight()
+        light.color = UIColor.white
+        light.name = "custom_light"
+        light.intensity = 1
+        light.type = .ambient
+        scene.rootNode.light = light
         
         self.setScene(scene)
-        
         self.gameView!.autoenablesDefaultLighting = true
         
         // allows the user to manipulate the camera
@@ -41,7 +48,7 @@ class GameViewController: UIViewController {
         self.gameView!.showsStatistics = true
         
         // configure the view
-        self.gameView!.backgroundColor = UIColor.gray
+        self.gameView!.backgroundColor = UIColor.white
 
         self.gameView!.delegate = self
     }
@@ -52,7 +59,7 @@ class GameViewController: UIViewController {
         self.scene = scene
 
         //to give nice reflections :)
-        scene.lightingEnvironment.contents = "art.scnassets/shinyRoom.jpg"
+//        scene.lightingEnvironment.contents = "art.scnassets/shinyRoom.jpg"
         scene.lightingEnvironment.intensity = 2;
     }
     

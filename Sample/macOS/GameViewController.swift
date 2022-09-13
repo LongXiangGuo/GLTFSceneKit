@@ -24,7 +24,7 @@ class GameViewController: NSViewController {
         
         var scene: SCNScene
         do {
-            let sceneSource = try GLTFSceneSource(named: "art.scnassets/GlassVase/Wayfair-GlassVase-BCHH2364.glb")
+            let sceneSource = try GLTFSceneSource(named: "art.scnassets/iX_Nan.glb")
             scene = try sceneSource.scene()
         } catch {
             print("\(error.localizedDescription)")
